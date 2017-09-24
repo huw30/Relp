@@ -9,6 +9,13 @@
 import Foundation
 
 struct Categories {
+    static func getFirst4() -> [[String: String]] {
+        return [["name" : "Afghan", "code": "afghani"],
+         ["name" : "African", "code": "african"],
+         ["name" : "American, New", "code": "newamerican"],
+         ["name" : "American, Traditional", "code": "tradamerican"]]
+
+    }
     static func retrieve() -> [[String: String]] {
         return
             [["name" : "Afghan", "code": "afghani"],

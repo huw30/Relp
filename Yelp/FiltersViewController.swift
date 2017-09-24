@@ -26,7 +26,7 @@ class FiltersViewController: UIViewController {
 
 
     let tableStructure: [PrefRowIdentifier] = [.OfferingADeal, .Distance, .SortBy, .Category]
-    let categories = Categories.retrieve()
+    var categories: [[String: String]]!
 
     var categorySwitchStates = [Int:Bool]()
     var offerADealSwitchState: Bool = false
@@ -38,12 +38,13 @@ class FiltersViewController: UIViewController {
     let distances: [String] = Definition.distances
     let radius: [Double] = Definition.radius
     let sortBy: [YelpSortMode] = [.bestMatched, .distance, .highestRated]
-    var distanceExpend = false
-    var sortByExpend = false
-    var categoryExpend = false
+    var distanceExpand = false
+    var sortByExpand = false
+    var categoryExpand = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.categories = Categories.getFirst4()
         self.getFiltersFromUserDefaults()
     }
 
@@ -53,7 +54,7 @@ class FiltersViewController: UIViewController {
         var selectedCategories = [String]()
         for (row, isSelected) in self.categorySwitchStates {
             if isSelected {
-                selectedCategories.append(self.categories[row]["code"]!)
+                selectedCategories.append(Categories.retrieve()[row]["code"]!)
             }
         }
 
@@ -86,18 +87,15 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
         switch prefIdentifier {
         case PrefRowIdentifier.Category:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryFilterCell") as! CategoryFilterCell
+            // show more/show less row
 
-            //TODO: BUILD A CUSTOM SHOWMORE/LESS CELL
-            // show more
-            if indexPath.row == 3 && !categoryExpend{
-                cell.showAsShowMore()
-                return cell
-            } else if indexPath.row == self.categories.count {
-                cell.showAsShowLess()
+            if indexPath.row == self.categories.count {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToggleCategoryCell") as! ToggleCategoryCell
+                cell.togLabel.text = self.categoryExpand ? "Show Less" : "Show More"
                 return cell
             }
 
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryFilterCell") as! CategoryFilterCell
             cell.category = self.categories[indexPath.row]
             cell.categorySwitch.isOn = self.categorySwitchStates[indexPath.row] ?? false
             cell.delegate = self
@@ -126,11 +124,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableStructure[section] == PrefRowIdentifier.Category {
-            if self.categoryExpend {
-                return self.categories.count + 1
-            } else {
-                return 4
-            }
+            return self.categories.count + 1
         } else if tableStructure[section] == PrefRowIdentifier.Distance {
             return self.distances.count
         } else if tableStructure[section] == PrefRowIdentifier.SortBy {
@@ -151,27 +145,33 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableStructure[indexPath.section] == PrefRowIdentifier.Distance {
             if indexPath.row == self.selectedDistance {
-                self.distanceExpend = true
+                self.distanceExpand = true
             } else{
                 self.selectedDistance = indexPath.row
-                self.distanceExpend = false
+                self.distanceExpand = false
             }
             self.tableView.reloadSections(IndexSet (integer: indexPath.section), with: .automatic)
         }
         if tableStructure[indexPath.section] == PrefRowIdentifier.SortBy {
             if indexPath.row == self.selectedSortBy {
-                self.sortByExpend = true
+                self.sortByExpand = true
             } else{
                 self.selectedSortBy = indexPath.row
-                self.sortByExpend = false
+                self.sortByExpand = false
             }
             self.tableView.reloadSections(IndexSet (integer: indexPath.section), with: .automatic)
         }
+
         if tableStructure[indexPath.section] == PrefRowIdentifier.Category {
-            if indexPath.row == 3 && !self.categoryExpend {
-                self.categoryExpend = true
-            } else if indexPath.row == self.categories.count && self.categoryExpend {
-                self.categoryExpend = false
+            let cell = tableView.cellForRow(at: indexPath)
+            if cell is ToggleCategoryCell {
+                if self.categoryExpand {
+                    self.categories = Categories.getFirst4()
+                } else {
+                    self.categories = Categories.retrieve()
+                }
+
+                self.categoryExpand = !self.categoryExpand
             }
 
             self.tableView.reloadSections(IndexSet (integer: indexPath.section), with: .automatic)
@@ -180,7 +180,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableStructure[indexPath.section] == PrefRowIdentifier.Distance {
-            if self.distanceExpend {
+            if self.distanceExpand {
                 return 45
             } else {
                 if indexPath.row == selectedDistance {
@@ -191,7 +191,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         if tableStructure[indexPath.section] == PrefRowIdentifier.SortBy {
-            if self.sortByExpend {
+            if self.sortByExpand {
                 return 45
             } else {
                 if indexPath.row == selectedSortBy {
