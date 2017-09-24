@@ -11,7 +11,9 @@ import UIKit
 class BusinessesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    weak var searchBar: UISearchBar!
 
+    var searchActive : Bool = false
     var businesses: [Business]!
     
     override func viewDidLoad() {
@@ -19,19 +21,14 @@ class BusinessesViewController: UIViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+
+        searchBar = UISearchBar()
+        navigationItem.titleView = searchBar
         
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
+
             self.businesses = businesses
             self.tableView.reloadData()
-
-            if let businesses = businesses {
-                for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
-                }
-            }
-            
             }
         )
         
@@ -47,24 +44,17 @@ class BusinessesViewController: UIViewController {
          */
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationNavController = segue.destination as! UINavigationController
+        let filtersController = destinationNavController.topViewController as! FiltersViewController
+
+        filtersController.delegate = self
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
+// MARK: delegates implementation
 extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell") as? BusinessCell else {
@@ -80,6 +70,40 @@ extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
             return businesses!.count
         } else {
             return 0
+        }
+    }
+}
+
+extension BusinessesViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.tableView.reloadData()
+    }
+}
+
+extension BusinessesViewController: FiltersViewControllerDelegate {
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : Any]) {
+        let categories = filters["categories"] as? [String]
+        let deals = filters["offerADeal"] as? Bool
+
+        Business.searchWithTerm(term: "Restaurants", sort: YelpSortMode(rawValue: 0), categories: categories, deals: deals) {
+            (businesses: [Business]?, error: Error?) in
+            self.businesses = businesses
+            self.tableView.reloadData()
         }
     }
 }
