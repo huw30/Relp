@@ -19,6 +19,9 @@
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
 		B73528B01F76427000DDB892 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73528AF1F76427000DDB892 /* FiltersViewController.swift */; };
 		B73528B21F76F18F00DDB892 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73528B11F76F18F00DDB892 /* Categories.swift */; };
+		B75E063E1F78469F00A8A5FF /* FiltersViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E063D1F78469F00A8A5FF /* FiltersViewControllerTableView.swift */; };
+		B75E06401F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E063F1F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift */; };
+		B75E06431F7847A400A8A5FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06421F7847A400A8A5FF /* Colors.swift */; };
 		B77A8F5B1F770017004AB7F3 /* OfferDealFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */; };
 		B77A8F5D1F771A7F004AB7F3 /* PrefRowIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */; };
 		B77A8F601F771B87004AB7F3 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5F1F771B87004AB7F3 /* Delegates.swift */; };
@@ -60,6 +63,9 @@
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73528AF1F76427000DDB892 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		B73528B11F76F18F00DDB892 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		B75E063D1F78469F00A8A5FF /* FiltersViewControllerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewControllerTableView.swift; sourceTree = "<group>"; };
+		B75E063F1F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewControllerDataPersist.swift; sourceTree = "<group>"; };
+		B75E06421F7847A400A8A5FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferDealFilterCell.swift; sourceTree = "<group>"; };
 		B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefRowIdentifier.swift; sourceTree = "<group>"; };
 		B77A8F5F1F771B87004AB7F3 /* Delegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
@@ -116,6 +122,8 @@
 		222D8A5719CCF9F900D2DB53 /* Yelp */ = {
 			isa = PBXGroup;
 			children = (
+				B75E06411F78479800A8A5FF /* Utils */,
+				B75E063C1F78466700A8A5FF /* Extensions */,
 				B77A8F5E1F771B67004AB7F3 /* Delegates */,
 				B7F832361F74D07000329F92 /* Views */,
 				22AAAA9A1AEA0AA100A544AF /* Models */,
@@ -191,6 +199,23 @@
 				0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B75E063C1F78466700A8A5FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B75E063D1F78469F00A8A5FF /* FiltersViewControllerTableView.swift */,
+				B75E063F1F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B75E06411F78479800A8A5FF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B75E06421F7847A400A8A5FF /* Colors.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		B77A8F5E1F771B67004AB7F3 /* Delegates */ = {
@@ -429,6 +454,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7A7DED81F782CB000DEBA39 /* ToggleCategoryCell.swift in Sources */,
+				B75E06431F7847A400A8A5FF /* Colors.swift in Sources */,
+				B75E06401F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift in Sources */,
 				B7FC23BD1F776D8A0058F546 /* SortByCell.swift in Sources */,
 				B7F832381F74D0AB00329F92 /* BusinessCell.swift in Sources */,
 				B73528B21F76F18F00DDB892 /* Categories.swift in Sources */,
@@ -438,6 +465,7 @@
 				B73528B01F76427000DDB892 /* FiltersViewController.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				B77A8F5D1F771A7F004AB7F3 /* PrefRowIdentifier.swift in Sources */,
+				B75E063E1F78469F00A8A5FF /* FiltersViewControllerTableView.swift in Sources */,
 				B77A8F601F771B87004AB7F3 /* Delegates.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,
