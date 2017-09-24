@@ -11,10 +11,10 @@ import UIKit
 class BusinessesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    weak var searchBar: UISearchBar!
 
-    var searchActive : Bool = false
     var businesses: [Business]!
+    var searchTerm: String = "Restaurants"
+    var searchActive : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,27 +22,11 @@ class BusinessesViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
 
-        searchBar = UISearchBar()
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
-        
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
 
-            self.businesses = businesses
-            self.tableView.reloadData()
-            }
-        )
-        
-        /* Example of Yelp search with more search options specified
-         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-         self.businesses = businesses
-         
-         for business in businesses {
-         print(business.name!)
-         print(business.address!)
-         }
-         }
-         */
-        
+        self.loadResult()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,6 +36,13 @@ class BusinessesViewController: UIViewController {
         filtersController.delegate = self
     }
     
+    func loadResult() {
+        Business.searchWithTerm(term: self.searchTerm, completion: { (businesses: [Business]?, error: Error?) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+            }
+        )
+    }
 }
 
 // MARK: delegates implementation
@@ -91,7 +82,8 @@ extension BusinessesViewController: UISearchBarDelegate {
         searchActive = false
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.tableView.reloadData()
+        self.searchTerm = searchText
+        self.loadResult()
     }
 }
 
@@ -100,8 +92,9 @@ extension BusinessesViewController: FiltersViewControllerDelegate {
         let categories = filters["categories"] as? [String]
         let deals = filters["offerADeal"] as? Bool
         let sortBy = filters["sortBy"] as? YelpSortMode
+        let radius = filters["radius"] as? Int
 
-        Business.searchWithTerm(term: "Restaurants", sort: sortBy, categories: categories, deals: deals) {
+        Business.searchWithTerm(term: self.searchTerm, sort: sortBy, radius: radius, categories: categories, deals: deals) {
             (businesses: [Business]?, error: Error?) in
             self.businesses = businesses
             self.tableView.reloadData()

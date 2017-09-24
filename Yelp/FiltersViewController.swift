@@ -17,31 +17,36 @@ class FiltersViewController: UIViewController {
 
     @IBAction func onSearch(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        self.setFiltersToUserDefaults()
+
         let filters = self.prepareFilters()
 
         delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
     }
 
+
     let tableStructure: [PrefRowIdentifier] = [.OfferingADeal, .Distance, .SortBy, .Category]
     let categories = Categories.retrieve()
-    
+
     var categorySwitchStates = [Int:Bool]()
     var offerADealSwitchState: Bool = false
+    var selectedDistance: Int = 0
+    var selectedSortBy: Int = 0
 
     var delegate: FiltersViewControllerDelegate?
 
     // MOVE TO OTHER PLACES
     let distances: [String] = ["Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"]
-    var selectedDistance: Int = 0 //TODO: let this equals to actually selected
+    let radius: [Double] = [0, 0.3, 1, 5, 20]
     var distanceExpend = false
 
     let sortBy: [YelpSortMode] = [.bestMatched, .distance, .highestRated]
-    var selectedSortBy: Int = 0 //TODO: let this equals to actually selected
     var sortByExpend = false
     // MOVE TO OTHER PLACES
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getFiltersFromUserDefaults()
     }
 
     func prepareFilters() -> [String: Any] {
@@ -62,8 +67,13 @@ class FiltersViewController: UIViewController {
         
         filters["offerADeal"] = self.offerADealSwitchState
         filters["sortBy"] = self.sortBy[selectedSortBy]
-        
-        
+
+        let radius = Int(Double(self.radius[selectedDistance] * 1609.34).rounded())
+
+        if radius > 0 {
+            filters["radius"] = radius
+        }
+
         return filters
     }
 
@@ -86,37 +96,33 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
         let prefIdentifier = tableStructure[indexPath.section]
 
-        // Category filters
-        if prefIdentifier == PrefRowIdentifier.Category {
+        switch prefIdentifier {
+        case PrefRowIdentifier.Category:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryFilterCell") as! CategoryFilterCell
             cell.category = self.categories[indexPath.row]
             cell.categorySwitch.isOn = self.categorySwitchStates[indexPath.row] ?? false
             cell.delegate = self
             cell.setCell()
             return cell
-        } else if prefIdentifier == PrefRowIdentifier.OfferingADeal {
+        case PrefRowIdentifier.OfferingADeal:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OfferDealFilterCell") as! OfferDealFilterCell
             cell.delegate = self
             cell.offerDealSwitch.isOn = self.offerADealSwitchState
             return cell
-        } else if prefIdentifier == PrefRowIdentifier.Distance {
+        case PrefRowIdentifier.Distance:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DistanceFilterCell") as! DistanceFilterCell
             let distance = self.distances[indexPath.row]
-
             cell.labelData = distance
             cell.setupCell()
-
             return cell
-        } else {
+        case PrefRowIdentifier.SortBy:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SortByCell") as! SortByCell
             let sortMode = self.sortBy[indexPath.row]
-
             cell.sortMode = sortMode
             cell.setupCell()
-
             return cell
-
         }
+
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -201,5 +207,32 @@ extension FiltersViewController: CategoryFilterCellDelegate {
 extension FiltersViewController: OfferDealFilterCellDelegate {
     func offerDealFilterCell(offerDealFilterCell: OfferDealFilterCell, didChangeValue value: Bool) {
         self.offerADealSwitchState = value
+    }
+}
+
+// Mark: data persist
+extension FiltersViewController {
+    func getFiltersFromUserDefaults() {
+        let defaults = UserDefaults.standard
+        if let savedFilters = defaults.value(forKey: "yelpFilters") as? [String: Any] {
+            self.offerADealSwitchState = savedFilters["offerADealSwitchState"] as! Bool
+            self.selectedDistance = savedFilters["selectedDistance"] as! Int
+            self.selectedSortBy = savedFilters["selectedSortBy"] as! Int
+        }
+
+        if let data = defaults.object(forKey: "categorySwitchStates") as? NSData {
+            self.categorySwitchStates = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as! [Int : Bool]
+        }
+    }
+
+    func setFiltersToUserDefaults() {
+        let defaults = UserDefaults.standard
+        var savedFilters = [String: Any]()
+
+        savedFilters["offerADealSwitchState"] = self.offerADealSwitchState
+        savedFilters["selectedDistance"] = self.selectedDistance
+        savedFilters["selectedSortBy"] = self.selectedSortBy
+        defaults.setValue(savedFilters, forKey: "yelpFilters")
+        defaults.setValue(NSKeyedArchiver.archivedData(withRootObject: self.categorySwitchStates), forKey: "categorySwitchStates")
     }
 }
