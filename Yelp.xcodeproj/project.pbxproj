@@ -26,6 +26,7 @@
 		B7F832381F74D0AB00329F92 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F832371F74D0AB00329F92 /* BusinessCell.swift */; };
 		B7FC23BB1F774F5B0058F546 /* DistanceFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC23BA1F774F5B0058F546 /* DistanceFilterCell.swift */; };
 		B7FC23BD1F776D8A0058F546 /* SortByCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC23BC1F776D8A0058F546 /* SortByCell.swift */; };
+		B7FC23C11F77988F0058F546 /* Definition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC23C01F77988F0058F546 /* Definition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B7F832371F74D0AB00329F92 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		B7FC23BA1F774F5B0058F546 /* DistanceFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceFilterCell.swift; sourceTree = "<group>"; };
 		B7FC23BC1F776D8A0058F546 /* SortByCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortByCell.swift; sourceTree = "<group>"; };
+		B7FC23C01F77988F0058F546 /* Definition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definition.swift; sourceTree = "<group>"; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 				22AAAA981AEA0A9700A544AF /* Business.swift */,
 				B73528B11F76F18F00DDB892 /* Categories.swift */,
 				B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */,
+				B7FC23C01F77988F0058F546 /* Definition.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				B7F832381F74D0AB00329F92 /* BusinessCell.swift in Sources */,
 				B73528B21F76F18F00DDB892 /* Categories.swift in Sources */,
 				B796B28E1F7626F600EF5F8B /* CategoryFilterCell.swift in Sources */,
+				B7FC23C11F77988F0058F546 /* Definition.swift in Sources */,
 				B77A8F5B1F770017004AB7F3 /* OfferDealFilterCell.swift in Sources */,
 				B73528B01F76427000DDB892 /* FiltersViewController.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,

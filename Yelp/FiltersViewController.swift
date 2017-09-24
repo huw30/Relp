@@ -35,14 +35,12 @@ class FiltersViewController: UIViewController {
 
     var delegate: FiltersViewControllerDelegate?
 
-    // MOVE TO OTHER PLACES
-    let distances: [String] = ["Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"]
-    let radius: [Double] = [0, 0.3, 1, 5, 20]
-    var distanceExpend = false
-
+    let distances: [String] = Definition.distances
+    let radius: [Double] = Definition.radius
     let sortBy: [YelpSortMode] = [.bestMatched, .distance, .highestRated]
+    var distanceExpend = false
     var sortByExpend = false
-    // MOVE TO OTHER PLACES
+    var categoryExpend = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,16 +74,6 @@ class FiltersViewController: UIViewController {
 
         return filters
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 
@@ -99,6 +87,17 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
         switch prefIdentifier {
         case PrefRowIdentifier.Category:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryFilterCell") as! CategoryFilterCell
+
+            //TODO: BUILD A CUSTOM SHOWMORE/LESS CELL
+            // show more
+            if indexPath.row == 3 && !categoryExpend{
+                cell.showAsShowMore()
+                return cell
+            } else if indexPath.row == self.categories.count {
+                cell.showAsShowLess()
+                return cell
+            }
+
             cell.category = self.categories[indexPath.row]
             cell.categorySwitch.isOn = self.categorySwitchStates[indexPath.row] ?? false
             cell.delegate = self
@@ -127,7 +126,11 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableStructure[section] == PrefRowIdentifier.Category {
-            return self.categories.count
+            if self.categoryExpend {
+                return self.categories.count + 1
+            } else {
+                return 4
+            }
         } else if tableStructure[section] == PrefRowIdentifier.Distance {
             return self.distances.count
         } else if tableStructure[section] == PrefRowIdentifier.SortBy {
@@ -148,7 +151,6 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableStructure[indexPath.section] == PrefRowIdentifier.Distance {
             if indexPath.row == self.selectedDistance {
-                // expend
                 self.distanceExpend = true
             } else{
                 self.selectedDistance = indexPath.row
@@ -158,7 +160,6 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if tableStructure[indexPath.section] == PrefRowIdentifier.SortBy {
             if indexPath.row == self.selectedSortBy {
-                // expend
                 self.sortByExpend = true
             } else{
                 self.selectedSortBy = indexPath.row
@@ -166,11 +167,20 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             }
             self.tableView.reloadSections(IndexSet (integer: indexPath.section), with: .automatic)
         }
+        if tableStructure[indexPath.section] == PrefRowIdentifier.Category {
+            if indexPath.row == 3 && !self.categoryExpend {
+                self.categoryExpend = true
+            } else if indexPath.row == self.categories.count && self.categoryExpend {
+                self.categoryExpend = false
+            }
+
+            self.tableView.reloadSections(IndexSet (integer: indexPath.section), with: .automatic)
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableStructure[indexPath.section] == PrefRowIdentifier.Distance {
-            if self.distanceExpend == true {
+            if self.distanceExpend {
                 return 45
             } else {
                 if indexPath.row == selectedDistance {
@@ -181,7 +191,7 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         if tableStructure[indexPath.section] == PrefRowIdentifier.SortBy {
-            if self.sortByExpend == true {
+            if self.sortByExpend {
                 return 45
             } else {
                 if indexPath.row == selectedSortBy {

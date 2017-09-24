@@ -32,4 +32,12 @@ class CategoryFilterCell: UITableViewCell {
         categoryLabel.text = category["name"]
         self.selectionStyle = .none
     }
+    func showAsShowMore() {
+        categoryLabel.text = "Show More"
+        categorySwitch.isHidden = true
+    }
+    func showAsShowLess() {
+        categoryLabel.text = "Show Less"
+        categorySwitch.isHidden = true
+    }
 }
