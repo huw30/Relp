@@ -99,8 +99,9 @@ extension BusinessesViewController: FiltersViewControllerDelegate {
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : Any]) {
         let categories = filters["categories"] as? [String]
         let deals = filters["offerADeal"] as? Bool
+        let sortBy = filters["sortBy"] as? YelpSortMode
 
-        Business.searchWithTerm(term: "Restaurants", sort: YelpSortMode(rawValue: 0), categories: categories, deals: deals) {
+        Business.searchWithTerm(term: "Restaurants", sort: sortBy, categories: categories, deals: deals) {
             (businesses: [Business]?, error: Error?) in
             self.businesses = businesses
             self.tableView.reloadData()
