@@ -10,6 +10,7 @@ import UIKit
 
 class OfferDealFilterCell: UITableViewCell {
     @IBOutlet weak var offerDealSwitch: UISwitch!
+    @IBOutlet weak var layerView: UIView!
     weak var delegate: OfferDealFilterCellDelegate?
 
     @IBAction func switchValueChanged(_ sender: Any) {
@@ -17,6 +18,7 @@ class OfferDealFilterCell: UITableViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
+        UITransform.addBorder(layer: layerView.layer)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

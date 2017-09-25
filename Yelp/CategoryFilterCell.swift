@@ -12,6 +12,7 @@ class CategoryFilterCell: UITableViewCell {
 
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var categorySwitch: UISwitch!
+    @IBOutlet weak var layerView: UIView!
 
     weak var delegate: CategoryFilterCellDelegate?
     var category: [String: String]!
@@ -22,6 +23,7 @@ class CategoryFilterCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        UITransform.addBorder(layer: layerView.layer)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

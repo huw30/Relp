@@ -15,10 +15,12 @@ class DistanceFilterCell: UITableViewCell {
     var labelData: String!
 
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var layerView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        UITransform.addBorder(layer: layerView.layer)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

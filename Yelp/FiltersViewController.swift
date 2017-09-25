@@ -47,6 +47,8 @@ class FiltersViewController: UIViewController {
         self.categories = Categories.getFirst4()
         self.getFiltersFromUserDefaults()
         
+        tableView.separatorStyle = .none
+        
         let leftBarButton = navigationItem.leftBarButtonItem!
         let rightBarButton = navigationItem.rightBarButtonItem!
         

@@ -21,8 +21,6 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == self.categories.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToggleCategoryCell") as! ToggleCategoryCell
                 cell.togLabel.text = self.categoryExpand ? "Show Less" : "See All"
-                UITransform.addBorder(layer: cell.layer)
-
                 return cell
             }
 
@@ -31,13 +29,11 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             cell.categorySwitch.isOn = self.categorySwitchStates[indexPath.row] ?? false
             cell.delegate = self
             cell.setCell()
-            UITransform.addBorder(layer: cell.layer)
             return cell
         case PrefRowIdentifier.OfferingADeal:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OfferDealFilterCell") as! OfferDealFilterCell
             cell.delegate = self
             cell.offerDealSwitch.isOn = self.offerADealSwitchState
-            UITransform.addBorder(layer: cell.layer)
 
             return cell
         case PrefRowIdentifier.Distance:
@@ -45,14 +41,12 @@ extension FiltersViewController: UITableViewDelegate, UITableViewDataSource {
             let distance = self.distances[indexPath.row]
             cell.labelData = distance
             cell.setupCell()
-            UITransform.addBorder(layer: cell.layer)
             return cell
         case PrefRowIdentifier.SortBy:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SortByCell") as! SortByCell
             let sortMode = self.sortBy[indexPath.row]
             cell.sortMode = sortMode
             cell.setupCell()
-            UITransform.addBorder(layer: cell.layer)
             return cell
         }
     }
