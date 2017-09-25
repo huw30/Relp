@@ -48,9 +48,11 @@ class BusinessesViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationNavController = segue.destination as! UINavigationController
-        let filtersController = destinationNavController.topViewController as! FiltersViewController
-
-        filtersController.delegate = self
+        let filtersController = destinationNavController.topViewController as? FiltersViewController
+        filtersController?.delegate = self
+        
+        let mapViewController = destinationNavController.topViewController as? BusinessMapViewController
+        mapViewController?.businesses = self.businesses
     }
     
     func loadResult(offset: Int) {

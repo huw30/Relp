@@ -24,6 +24,7 @@
 		B75E06431F7847A400A8A5FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06421F7847A400A8A5FF /* Colors.swift */; };
 		B75E06451F78595D00A8A5FF /* UITransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06441F78595D00A8A5FF /* UITransform.swift */; };
 		B75E06471F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06461F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift */; };
+		B75E06491F78DAE900A8A5FF /* BusinessMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06481F78DAE900A8A5FF /* BusinessMapViewController.swift */; };
 		B77A8F5B1F770017004AB7F3 /* OfferDealFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */; };
 		B77A8F5D1F771A7F004AB7F3 /* PrefRowIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */; };
 		B77A8F601F771B87004AB7F3 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5F1F771B87004AB7F3 /* Delegates.swift */; };
@@ -70,6 +71,7 @@
 		B75E06421F7847A400A8A5FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B75E06441F78595D00A8A5FF /* UITransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITransform.swift; sourceTree = "<group>"; };
 		B75E06461F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		B75E06481F78DAE900A8A5FF /* BusinessMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessMapViewController.swift; sourceTree = "<group>"; };
 		B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferDealFilterCell.swift; sourceTree = "<group>"; };
 		B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefRowIdentifier.swift; sourceTree = "<group>"; };
 		B77A8F5F1F771B87004AB7F3 /* Delegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */,
 				B73528AF1F76427000DDB892 /* FiltersViewController.swift */,
+				B75E06481F78DAE900A8A5FF /* BusinessMapViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				B73528B21F76F18F00DDB892 /* Categories.swift in Sources */,
 				B796B28E1F7626F600EF5F8B /* CategoryFilterCell.swift in Sources */,
 				B7FC23C11F77988F0058F546 /* Definition.swift in Sources */,
+				B75E06491F78DAE900A8A5FF /* BusinessMapViewController.swift in Sources */,
 				B77A8F5B1F770017004AB7F3 /* OfferDealFilterCell.swift in Sources */,
 				B73528B01F76427000DDB892 /* FiltersViewController.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
