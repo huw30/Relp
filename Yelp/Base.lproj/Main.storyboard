@@ -149,7 +149,7 @@
             </objects>
             <point key="canvasLocation" x="3051" y="355"/>
         </scene>
-        <!--Filters View Controller-->
+        <!--Filter-->
         <scene sceneID="VBC-Rw-kEP">
             <objects>
                 <viewController id="BjP-v5-FvJ" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -338,7 +338,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sD-xf-WZJ">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="41.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="41.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show more" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ewn-0u-9nK">
@@ -350,9 +350,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Ewn-0u-9nK" firstAttribute="centerX" secondItem="Fjx-b1-N1w" secondAttribute="centerX" id="DfX-eN-uHQ"/>
-                                                <constraint firstItem="0sD-xf-WZJ" firstAttribute="leading" secondItem="Fjx-b1-N1w" secondAttribute="leading" constant="10" id="FbM-YW-U7t"/>
+                                                <constraint firstItem="0sD-xf-WZJ" firstAttribute="leading" secondItem="Fjx-b1-N1w" secondAttribute="leading" constant="15" id="FbM-YW-U7t"/>
                                                 <constraint firstItem="Ewn-0u-9nK" firstAttribute="centerY" secondItem="Fjx-b1-N1w" secondAttribute="centerY" id="QjA-MZ-8cT"/>
-                                                <constraint firstAttribute="trailing" secondItem="0sD-xf-WZJ" secondAttribute="trailing" constant="10" id="S3P-Nw-3hq"/>
+                                                <constraint firstAttribute="trailing" secondItem="0sD-xf-WZJ" secondAttribute="trailing" constant="15" id="S3P-Nw-3hq"/>
                                                 <constraint firstAttribute="bottom" secondItem="0sD-xf-WZJ" secondAttribute="bottom" id="mQb-HW-2PV"/>
                                                 <constraint firstItem="0sD-xf-WZJ" firstAttribute="top" secondItem="Fjx-b1-N1w" secondAttribute="top" id="x1Y-oJ-qAi"/>
                                             </constraints>
@@ -378,7 +378,7 @@
                             <constraint firstItem="iP7-cq-dys" firstAttribute="top" secondItem="xBl-D3-WBp" secondAttribute="top" id="bzR-aR-jTa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9nb-SI-ol9">
+                    <navigationItem key="navigationItem" title="Filter" id="9nb-SI-ol9">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="8mi-La-9XC">
                             <connections>
                                 <action selector="onCancel:" destination="BjP-v5-FvJ" id="xAH-D9-ZTk"/>
@@ -433,6 +433,9 @@
                         <color key="backgroundColor" red="0.76955437660000003" green="0.069429613649999999" blue="0.002395178657" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.76955437660000003" green="0.069429613649999999" blue="0.002395178657" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

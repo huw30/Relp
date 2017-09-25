@@ -28,6 +28,7 @@ class DistanceFilterCell: UITableViewCell {
     }
     
     func setupCell() {
-         distanceLabel.text = labelData
+        distanceLabel.text = labelData
+        self.selectionStyle = .none
     }
 }

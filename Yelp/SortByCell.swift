@@ -25,6 +25,7 @@ class SortByCell: UITableViewCell {
     }
 
     func setupCell() {
+        self.selectionStyle = .none
         switch sortMode {
         case YelpSortMode.bestMatched:
             sortByLabel.text = "Best Matched"

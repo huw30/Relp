@@ -14,6 +14,7 @@ class ToggleCategoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         UITransform.addBorder(layer: layerView.layer)
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
