@@ -37,9 +37,11 @@ class BusinessesViewController: UIViewController {
         navigationItem.titleView = searchBar
         
         let leftBarButton = navigationItem.leftBarButtonItem!
+        let rightBarButton = navigationItem.rightBarButtonItem!
         
-        if let font = UIFont(name: "Helvetica", size: 16) {
+        if let font = UIFont(name: "Helvetica", size: 14) {
             leftBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+            rightBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
         }
 
         self.addLoadingView()
@@ -64,7 +66,10 @@ class BusinessesViewController: UIViewController {
 
         Business.searchWithTerm(term: searchTerm, sort: sortBy, radius: radius, categories: categories, deals: deals, offset: offset) {
             (businesses: [Business]?, error: Error?) in
-            self.businesses = self.businesses + businesses!
+            if businesses != nil {
+                self.businesses = self.businesses + businesses!
+            }
+
             self.isMoreDataLoading = false
             self.tableView.reloadData()
             self.loadingMoreView!.stopAnimating()
