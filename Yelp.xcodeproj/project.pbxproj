@@ -23,6 +23,7 @@
 		B75E06401F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E063F1F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift */; };
 		B75E06431F7847A400A8A5FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06421F7847A400A8A5FF /* Colors.swift */; };
 		B75E06451F78595D00A8A5FF /* UITransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06441F78595D00A8A5FF /* UITransform.swift */; };
+		B75E06471F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E06461F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift */; };
 		B77A8F5B1F770017004AB7F3 /* OfferDealFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */; };
 		B77A8F5D1F771A7F004AB7F3 /* PrefRowIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */; };
 		B77A8F601F771B87004AB7F3 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77A8F5F1F771B87004AB7F3 /* Delegates.swift */; };
@@ -68,6 +69,7 @@
 		B75E063F1F78472B00A8A5FF /* FiltersViewControllerDataPersist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewControllerDataPersist.swift; sourceTree = "<group>"; };
 		B75E06421F7847A400A8A5FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B75E06441F78595D00A8A5FF /* UITransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITransform.swift; sourceTree = "<group>"; };
+		B75E06461F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		B77A8F5A1F770017004AB7F3 /* OfferDealFilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferDealFilterCell.swift; sourceTree = "<group>"; };
 		B77A8F5C1F771A7F004AB7F3 /* PrefRowIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefRowIdentifier.swift; sourceTree = "<group>"; };
 		B77A8F5F1F771B87004AB7F3 /* Delegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				B75E06421F7847A400A8A5FF /* Colors.swift */,
 				B75E06441F78595D00A8A5FF /* UITransform.swift */,
+				B75E06461F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B75E06471F78D7CB00A8A5FF /* InfiniteScrollActivityView.swift in Sources */,
 				B7A7DED81F782CB000DEBA39 /* ToggleCategoryCell.swift in Sources */,
 				B75E06451F78595D00A8A5FF /* UITransform.swift in Sources */,
 				B75E06431F7847A400A8A5FF /* Colors.swift in Sources */,

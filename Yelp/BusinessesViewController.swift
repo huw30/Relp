@@ -12,10 +12,18 @@ class BusinessesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
 
-    var businesses: [Business]!
+    var businesses = [Business]()
     var searchTerm: String = "Restaurants"
-    var searchActive : Bool = false
-    
+    var categories: [String]?
+    var deals: Bool?
+    var sortBy: YelpSortMode?
+    var radius: Int?
+    var goffset: Int = 0
+
+    var searchActive: Bool = false
+    var isMoreDataLoading: Bool = false
+    var loadingMoreView: InfiniteScrollActivityView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +42,8 @@ class BusinessesViewController: UIViewController {
             leftBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
         }
 
-        self.loadResult()
+        self.addLoadingView()
+        self.loadResult(offset: 0)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,12 +53,32 @@ class BusinessesViewController: UIViewController {
         filtersController.delegate = self
     }
     
-    func loadResult() {
-        Business.searchWithTerm(term: self.searchTerm, completion: { (businesses: [Business]?, error: Error?) -> Void in
-            self.businesses = businesses
+    func loadResult(offset: Int) {
+
+        if offset == 0 {
+            self.goffset = 0
+            self.businesses.removeAll()
+        }
+
+        Business.searchWithTerm(term: searchTerm, sort: sortBy, radius: radius, categories: categories, deals: deals, offset: offset) {
+            (businesses: [Business]?, error: Error?) in
+            self.businesses = self.businesses + businesses!
+            self.isMoreDataLoading = false
             self.tableView.reloadData()
-            }
-        )
+            self.loadingMoreView!.stopAnimating()
+            self.goffset += self.businesses.count
+        }
+    }
+
+    func addLoadingView() {
+        let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.isHidden = true
+        tableView.addSubview(loadingMoreView!)
+        
+        var insets = tableView.contentInset
+        insets.bottom += InfiniteScrollActivityView.defaultHeight
+        tableView.contentInset = insets
     }
 }
 
@@ -65,11 +94,7 @@ extension BusinessesViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.businesses != nil {
-            return businesses!.count
-        } else {
-            return 0
-        }
+        return businesses.count
     }
 }
 
@@ -91,21 +116,37 @@ extension BusinessesViewController: UISearchBarDelegate {
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchTerm = searchText
-        self.loadResult()
+        self.loadResult(offset: 0)
     }
 }
 
 extension BusinessesViewController: FiltersViewControllerDelegate {
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : Any]) {
-        let categories = filters["categories"] as? [String]
-        let deals = filters["offerADeal"] as? Bool
-        let sortBy = filters["sortBy"] as? YelpSortMode
-        let radius = filters["radius"] as? Int
+        categories = filters["categories"] as? [String]
+        deals = filters["offerADeal"] as? Bool
+        sortBy = filters["sortBy"] as? YelpSortMode
+        radius = filters["radius"] as? Int
 
-        Business.searchWithTerm(term: self.searchTerm, sort: sortBy, radius: radius, categories: categories, deals: deals) {
-            (businesses: [Business]?, error: Error?) in
-            self.businesses = businesses
-            self.tableView.reloadData()
+        loadResult(offset: 0)
+    }
+}
+
+extension BusinessesViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+
+                // Update position of loadingMoreView, and start loading indicator
+                let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                loadingMoreView?.frame = frame
+                loadingMoreView!.startAnimating()
+
+                loadResult(offset: goffset)
+            }
         }
     }
 }
