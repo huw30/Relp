@@ -23,8 +23,16 @@ class BusinessesViewController: UIViewController {
         tableView.estimatedRowHeight = 120
 
         let searchBar = UISearchBar()
+
+        searchBar.placeholder = "Restaurants"
         searchBar.delegate = self
         navigationItem.titleView = searchBar
+        
+        let leftBarButton = navigationItem.leftBarButtonItem!
+        
+        if let font = UIFont(name: "Helvetica", size: 16) {
+            leftBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+        }
 
         self.loadResult()
     }

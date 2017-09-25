@@ -46,6 +46,14 @@ class FiltersViewController: UIViewController {
         super.viewDidLoad()
         self.categories = Categories.getFirst4()
         self.getFiltersFromUserDefaults()
+        
+        let leftBarButton = navigationItem.leftBarButtonItem!
+        let rightBarButton = navigationItem.rightBarButtonItem!
+        
+        if let font = UIFont(name: "Helvetica", size: 16) {
+            leftBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+            rightBarButton.setTitleTextAttributes([NSFontAttributeName:font], for: .normal)
+        }
     }
 
     func prepareFilters() -> [String: Any] {

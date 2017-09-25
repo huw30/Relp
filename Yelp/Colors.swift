@@ -11,4 +11,5 @@ import UIKit
 
 struct Colors {
     static let yelpyRed = UIColor(red: 211/255, green: 35/255, blue: 35/255, alpha: 1.0) /* #d32323 */
+    static let cellBorderColor = UIColor(red: 190/255, green: 190/255, blue: 190/255, alpha: 1.0) /* #bebebe */
 }

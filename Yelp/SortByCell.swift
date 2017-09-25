@@ -32,5 +32,4 @@ class SortByCell: UITableViewCell {
             sortByLabel.text = "Highest Rated"
         }
     }
-
 }
