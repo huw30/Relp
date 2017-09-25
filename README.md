@@ -42,7 +42,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/78ARnIK.gif' title='Video Walkthrough' width='' alt='Filters' />
+<img src='https://user-images.githubusercontent.com/5446130/30796531-5826bfdc-a187-11e7-988b-b6feb4d2c89d.gif' title='Video Walkthrough' width='' alt='Filters' />
 <img src='https://i.imgur.com/jZYv9gS.gif' title='Video Walkthrough' width='' alt='Search' />
 <img src='https://i.imgur.com/zjZrIko.gif' title='Video Walkthrough' width='' alt='Map' />
 
